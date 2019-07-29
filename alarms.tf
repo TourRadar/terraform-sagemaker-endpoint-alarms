@@ -20,7 +20,7 @@ resource "aws_cloudwatch_metric_alarm" "Invocation4XXErrors" {
 
 resource "aws_cloudwatch_metric_alarm" "Invocation5XXErrors" {
   count               = var.invocation_5xx_errors_enabled ? 1 : 0
-  alarm_name          = "${var.alarm_prefix}: Invocation 4xx Errors for ${var.endpoint_name}"
+  alarm_name          = "${var.alarm_prefix}: Invocation 5xx Errors for ${var.endpoint_name}"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.invocation_5xx_errors_periods
   threshold           = var.invocation_5xx_errors_threshold
