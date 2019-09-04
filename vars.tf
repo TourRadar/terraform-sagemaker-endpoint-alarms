@@ -80,3 +80,31 @@ variable "model_latency_period" {
   type    = number
   default = 60
 }
+
+
+
+
+variable "minimum_invocations_periods" {
+  type    = number
+  default = 1
+}
+
+variable "minimum_invocations_period" {
+  type    = number
+  default = 60
+}
+
+variable "minimum_invocations_treat_missing_data" {
+  type    = string
+  default = "breaching"
+}
+
+variable "minimum_invocations_checks" {
+  type = map(number)
+  default = {
+    P1 = 5
+    P2 = 10
+    P3 = 20
+    P4 = 30
+  }
+}
