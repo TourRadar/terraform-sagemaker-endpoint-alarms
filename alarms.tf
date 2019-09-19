@@ -8,7 +8,7 @@ resource "aws_cloudwatch_metric_alarm" "invocation_4xx_errors" {
   namespace           = "AWS/SageMaker"
   period              = var.invocation_4xx_errors_period
   statistic           = "Sum"
-  alarm_description   = "Priority: ${each.key} Alarm is above of threshold: ${var.invocation_4xx_errors_threshold}. Looks like endpoint triggering errors."
+  alarm_description   = "Priority: ${each.key} Alarm is above of threshold: ${each.value}. Looks like endpoint triggering errors."
   treat_missing_data  = "notBreaching"
   alarm_actions       = var.actions
   tags                = var.tags
