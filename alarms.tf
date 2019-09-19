@@ -1,14 +1,14 @@
-resource "aws_cloudwatch_metric_alarm" "Invocation4XXErrors" {
-  count               = var.invocation_4xx_errors_enabled ? 1 : 0
-  alarm_name          = "${var.alarm_prefix}: Invocation 4xx Errors for ${var.endpoint_name}"
+resource "aws_cloudwatch_metric_alarm" "invocation_4xx_errors" {
+  for_each            = var.invocation_4xx_errors_checks
+  alarm_name          = "${var.alarm_prefix}: ${each.key} Invocation 4xx Errors for ${var.endpoint_name}"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.invocation_4xx_errors_periods
-  threshold           = var.invocation_4xx_errors_threshold
+  threshold           = each.value
   metric_name         = "Invocation4XXErrors"
   namespace           = "AWS/SageMaker"
   period              = var.invocation_4xx_errors_period
   statistic           = "Sum"
-  alarm_description   = "Alarm is above of threshold: ${var.invocation_4xx_errors_threshold}. Looks like endpoint triggering errors."
+  alarm_description   = "Priority: ${each.key} Alarm is above of threshold: ${var.invocation_4xx_errors_threshold}. Looks like endpoint triggering errors."
   treat_missing_data  = "notBreaching"
   alarm_actions       = var.actions
   tags                = var.tags
@@ -19,17 +19,17 @@ resource "aws_cloudwatch_metric_alarm" "Invocation4XXErrors" {
 }
 
 
-resource "aws_cloudwatch_metric_alarm" "Invocation5XXErrors" {
-  count               = var.invocation_5xx_errors_enabled ? 1 : 0
-  alarm_name          = "${var.alarm_prefix}: Invocation 5xx Errors for ${var.endpoint_name}"
+resource "aws_cloudwatch_metric_alarm" "invocation_5xx_errors" {
+  for_each            = var.invocation_5xx_errors_checks
+  alarm_name          = "${var.alarm_prefix}: ${each.key} Invocation 5xx Errors for ${var.endpoint_name}"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.invocation_5xx_errors_periods
-  threshold           = var.invocation_5xx_errors_threshold
+  threshold           = each.value
   metric_name         = "Invocation5XXErrors"
   namespace           = "AWS/SageMaker"
   period              = var.invocation_4xx_errors_period
   statistic           = "Sum"
-  alarm_description   = "Alarm is above of threshold: ${var.invocation_5xx_errors_threshold}. Looks like endpoint triggering errors."
+  alarm_description   = "Priority: ${each.key} Alarm is above of threshold: ${each.value}. Looks like endpoint triggering errors."
   treat_missing_data  = "notBreaching"
   alarm_actions       = var.actions
   tags                = var.tags
@@ -40,9 +40,9 @@ resource "aws_cloudwatch_metric_alarm" "Invocation5XXErrors" {
 }
 
 
-resource "aws_cloudwatch_metric_alarm" "MinimumInvocations" {
+resource "aws_cloudwatch_metric_alarm" "minimum_invocations" {
   for_each            = var.minimum_invocations_checks
-  alarm_name          = "${var.alarm_prefix}: Invocation count drop to ${each.value}"
+  alarm_name          = "${var.alarm_prefix}: ${each.key} Invocation count drop to ${each.value}"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.minimum_invocations_periods
   threshold           = each.value

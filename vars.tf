@@ -15,14 +15,15 @@ variable "tags" {
 }
 
 
-variable "invocation_4xx_errors_enabled" {
-  type    = bool
-  default = true
-}
-
-variable "invocation_4xx_errors_threshold" {
-  type    = number
-  default = 1
+variable "invocation_4xx_errors_checks" {
+  type    = map(number)
+  default = {
+    P1 = 5
+    P2 = 4
+    P3 = 3
+    P4 = 2
+    P5 = 1
+  }
 }
 
 variable "invocation_4xx_errors_periods" {
@@ -36,16 +37,15 @@ variable "invocation_4xx_errors_period" {
 }
 
 
-
-
-variable "invocation_5xx_errors_enabled" {
-  type    = bool
-  default = true
-}
-
-variable "invocation_5xx_errors_threshold" {
-  type    = number
-  default = 1
+variable "invocation_5xx_errors_checks" {
+  type    = map(number)
+  default = {
+    P1 = 5
+    P2 = 4
+    P3 = 3
+    P4 = 2
+    P5 = 1
+  }
 }
 
 variable "invocation_5xx_errors_periods" {
