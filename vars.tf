@@ -6,6 +6,10 @@ variable "endpoint_name" {
   type = string
 }
 
+variable "variant_name" {
+  type = string
+}
+
 variable "alarm_prefix" {
   type = string
 }
@@ -16,7 +20,7 @@ variable "tags" {
 
 
 variable "invocation_4xx_errors_checks" {
-  type    = map(number)
+  type = map(number)
   default = {
     P1 = 5
     P2 = 4
@@ -38,7 +42,7 @@ variable "invocation_4xx_errors_period" {
 
 
 variable "invocation_5xx_errors_checks" {
-  type    = map(number)
+  type = map(number)
   default = {
     P1 = 5
     P2 = 4

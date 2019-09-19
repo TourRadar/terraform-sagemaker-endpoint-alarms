@@ -15,6 +15,7 @@ resource "aws_cloudwatch_metric_alarm" "invocation_4xx_errors" {
 
   dimensions = {
     EndpointName = var.endpoint_name
+    VariantName  = var.variant_name
   }
 }
 
@@ -36,6 +37,7 @@ resource "aws_cloudwatch_metric_alarm" "invocation_5xx_errors" {
 
   dimensions = {
     EndpointName = var.endpoint_name
+    VariantName  = var.variant_name
   }
 }
 
@@ -57,5 +59,6 @@ resource "aws_cloudwatch_metric_alarm" "minimum_invocations" {
 
   dimensions = {
     EndpointName = var.endpoint_name
+    VariantName  = var.variant_name
   }
 }
