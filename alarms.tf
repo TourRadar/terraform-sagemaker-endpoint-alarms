@@ -45,7 +45,7 @@ resource "aws_cloudwatch_metric_alarm" "invocation_5xx_errors" {
 resource "aws_cloudwatch_metric_alarm" "minimum_invocations" {
   for_each            = var.minimum_invocations_checks
   alarm_name          = "${var.alarm_prefix}: ${each.key} Invocation count drop to ${each.value}"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
+  comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods  = var.minimum_invocations_periods
   threshold           = each.value
   metric_name         = "Invocations"
