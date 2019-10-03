@@ -7,7 +7,7 @@ resource "aws_cloudwatch_metric_alarm" "invocation_4xx_errors" {
   metric_name         = "Invocation4XXErrors"
   namespace           = "AWS/SageMaker"
   period              = var.invocation_4xx_errors_period
-  statistic           = "Sum"
+  statistic           = "SampleCount"
   alarm_description   = "Priority: ${each.key} Alarm is above of threshold: ${each.value}. Looks like endpoint triggering errors."
   treat_missing_data  = "notBreaching"
   alarm_actions       = var.actions
@@ -29,7 +29,7 @@ resource "aws_cloudwatch_metric_alarm" "invocation_5xx_errors" {
   metric_name         = "Invocation5XXErrors"
   namespace           = "AWS/SageMaker"
   period              = var.invocation_4xx_errors_period
-  statistic           = "Sum"
+  statistic           = "SampleCount"
   alarm_description   = "Priority: ${each.key} Alarm is above of threshold: ${each.value}. Looks like endpoint triggering errors."
   treat_missing_data  = "notBreaching"
   alarm_actions       = var.actions
@@ -51,7 +51,7 @@ resource "aws_cloudwatch_metric_alarm" "minimum_invocations" {
   metric_name         = "Invocations"
   namespace           = "AWS/SageMaker"
   period              = var.minimum_invocations_period
-  statistic           = "Sum"
+  statistic           = "SampleCount"
   alarm_description   = "Priority: ${each.key} Count of invocations dropped to ${each.value}. Please check SerpApi if making the requests to ranker."
   treat_missing_data  = var.minimum_invocations_treat_missing_data
   alarm_actions       = var.actions
