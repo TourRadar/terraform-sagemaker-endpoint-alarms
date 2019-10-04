@@ -7,8 +7,8 @@ resource "aws_cloudwatch_metric_alarm" "invocation_4xx_errors" {
   metric_name         = "Invocation4XXErrors"
   namespace           = "AWS/SageMaker"
   period              = var.invocation_4xx_errors_period
-  statistic           = "SampleCount"
-  alarm_description   = "Priority: ${each.key} Alarm is above of threshold: ${each.value}. Looks like endpoint triggering errors."
+  statistic           = "Sum"
+  alarm_description   = "Priority: ${each.key} Alarm is above of threshold: ${each.value}. Looks like endpoint triggering errors. The number of InvokeEndpoint requests where the model returned a 4xx HTTP response code. For each 4xx response, 1 is sent; otherwise, 0 is sent."
   treat_missing_data  = "notBreaching"
   alarm_actions       = var.actions
   tags                = var.tags
@@ -29,8 +29,8 @@ resource "aws_cloudwatch_metric_alarm" "invocation_5xx_errors" {
   metric_name         = "Invocation5XXErrors"
   namespace           = "AWS/SageMaker"
   period              = var.invocation_4xx_errors_period
-  statistic           = "SampleCount"
-  alarm_description   = "Priority: ${each.key} Alarm is above of threshold: ${each.value}. Looks like endpoint triggering errors."
+  statistic           = "Sum"
+  alarm_description   = "Priority: ${each.key} Alarm is above of threshold: ${each.value}. Looks like endpoint triggering errors. The number of InvokeEndpoint requests where the model returned a 5xx HTTP response code. For each 5xx response, 1 is sent; otherwise, 0 is sent."
   treat_missing_data  = "notBreaching"
   alarm_actions       = var.actions
   tags                = var.tags
@@ -51,7 +51,7 @@ resource "aws_cloudwatch_metric_alarm" "minimum_invocations" {
   metric_name         = "Invocations"
   namespace           = "AWS/SageMaker"
   period              = var.minimum_invocations_period
-  statistic           = "SampleCount"
+  statistic           = "Sum"
   alarm_description   = "Priority: ${each.key} Count of invocations dropped to ${each.value}. Please check SerpApi if making the requests to ranker."
   treat_missing_data  = var.minimum_invocations_treat_missing_data
   alarm_actions       = var.actions
